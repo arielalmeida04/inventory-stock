@@ -1,5 +1,10 @@
 package com.devlound.inventory.response;
 
-public class CategoryResponse {
+import java.util.List;
+import java.util.Locale.Category;
 
+import lombok.Data;
+@Data
+public class CategoryResponse {
+private List<Category> category;
 }
