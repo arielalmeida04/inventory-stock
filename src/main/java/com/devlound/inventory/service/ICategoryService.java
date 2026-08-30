@@ -9,7 +9,7 @@ public interface ICategoryService {
 
     ResponseEntity<CategoryResponseRest> search();
     ResponseEntity<CategoryResponseRest> searchById(Long id);
-    ResponseEntity<CategoryResponseRest> create(CategoryResponseRest categoryResponseRest);
+    ResponseEntity<CategoryResponseRest> create(Category category);
     ResponseEntity<CategoryResponseRest> update(Long id, CategoryResponseRest categoryResponseRest);
     ResponseEntity<CategoryResponseRest> delete(Long id);
 

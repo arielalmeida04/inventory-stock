@@ -88,9 +88,32 @@ public class CategoryService implements ICategoryService {
 
     @Override
     @Transactional
-    public ResponseEntity<CategoryResponseRest> create(CategoryResponseRest categoryResponseRest) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    public ResponseEntity<CategoryResponseRest> create(Category category) {
+       CategoryResponseRest response = new CategoryResponseRest();
+            List<Category> categories = new ArrayList<>();
+            try {
+                Optional<Category> category = categoryDAO.findById(id);
+                
+
+                if (category.isPresent()) {
+
+                    categories.add(category.get());
+                    response.getCategoryResponse().setCategory(categories);
+                    response.setMetadata("Respuesta ok", "200", "respuesta exitosa");
+                    
+                } else {
+                    
+                    response.setMetadata("Respuesta nok", "404", "no se encontro ningun registro");
+                    return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.NOT_FOUND);
+                }
+
+
+            } catch (Exception e) {
+                return new  ResponseEntity<CategoryResponseRest>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            return new  ResponseEntity<CategoryResponseRest>(response, HttpStatus.OK);
+
     }
 
     @Override
