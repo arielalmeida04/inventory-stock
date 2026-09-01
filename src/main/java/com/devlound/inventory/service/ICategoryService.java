@@ -2,7 +2,7 @@ package com.devlound.inventory.service;
 
 import org.springframework.http.ResponseEntity;
 
-
+import com.devlound.inventory.model.Category;
 import com.devlound.inventory.response.CategoryResponseRest;
 
 public interface ICategoryService {
