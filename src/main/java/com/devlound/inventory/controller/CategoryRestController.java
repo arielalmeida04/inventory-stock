@@ -2,6 +2,8 @@ package com.devlound.inventory.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.devlound.inventory.model.Category;
 import com.devlound.inventory.response.CategoryResponseRest;
 
 import com.devlound.inventory.service.ICategoryService;
@@ -9,6 +11,9 @@ import com.devlound.inventory.service.ICategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -36,6 +41,11 @@ public ResponseEntity<CategoryResponseRest> searchCategoryById(@PathVariable Lon
     return response;
 }
 
+@PostMapping("/categories/create")
+public ResponseEntity<CategoryResponseRest> createCategory(@RequestBody Category category) {
+    ResponseEntity<CategoryResponseRest> response = service.create(category);
+    return response;
+}
 
 
 }

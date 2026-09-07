@@ -89,23 +89,25 @@ public class CategoryService implements ICategoryService {
     @Override
     @Transactional
     public ResponseEntity<CategoryResponseRest> create(Category category) {
-       CategoryResponseRest response = new CategoryResponseRest();
+    
+        CategoryResponseRest response = new CategoryResponseRest();
             List<Category> categories = new ArrayList<>();
+    
             try {
-                Optional<Category> category = categoryDAO.findById(id);
                 
-
-                if (category.isPresent()) {
-
-                    categories.add(category.get());
+                Category categorySaved = categoryDAO.save(category);
+                if (categorySaved != null) {
+                    categories.add(categorySaved);
                     response.getCategoryResponse().setCategory(categories);
                     response.setMetadata("Respuesta ok", "200", "respuesta exitosa");
                     
                 } else {
-                    
-                    response.setMetadata("Respuesta nok", "404", "no se encontro ningun registro");
-                    return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.NOT_FOUND);
+                    response.setMetadata("Respuesta nok", "400", "no se pudo crear el registro");
+                    return new ResponseEntity<CategoryResponseRest>(response, HttpStatus.BAD_REQUEST);
                 }
+                
+
+        
 
 
             } catch (Exception e) {
@@ -119,14 +121,14 @@ public class CategoryService implements ICategoryService {
     @Override
     @Transactional
     public ResponseEntity<CategoryResponseRest> update(Long id, CategoryResponseRest categoryResponseRest) {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
     @Override
     @Transactional
     public ResponseEntity<CategoryResponseRest> delete(Long id) {
-        // TODO Auto-generated method stub
+        
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
